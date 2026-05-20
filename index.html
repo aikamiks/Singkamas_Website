@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Singkamas</title>
+  <link rel="stylesheet" href="Style.css"/>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NEW: LOADING SCREEN
+════════════════════════════════════════════ -->
+<div id="loadingScreen">
+  <img src="Singkams_logo_white.png" alt="Singkamas" class="loader-logo">
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <div class="loader-text">Singkamas</div>
+</div>
+
+<!-- NEW: PAGE TRANSITION FLASH -->
+<div class="page-transition" id="pageTransition"></div>
+
+<!-- ═══════════════════════════════════════════
+     NEW: ANNOUNCEMENT BANNER
+════════════════════════════════════════════ -->
+<div id="announceBanner">
+   Introducing SingPhone 15 Pro — Titanium. A18 chip. &nbsp;
+  <span class="link-w" onclick="openModal('singphone-pro'); dismissBanner()">Learn more &rsaquo;</span>
+  <button class="banner-close" onclick="dismissBanner()" aria-label="Close banner">&#x2715;</button>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     NAVIGATION  (unchanged)
+════════════════════════════════════════════ -->
+<nav id="navbar">
+  <div class="nav-inner">
+
+    <button class="nav-logo" onclick="showPage('home')" aria-label="Singkamas Home">
+      <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <img src="singkamas_logo(1).png" width="40" height="40">
+        <path d="M20 4C20 4 10 8 8 17C6 24 10 31 16 34C17.5 34.8 19 35 20 35C21 35 22.5 34.8 24 34C30 31 34 24 32 17C30 8 20 4 20 4ZM20 4C20 4 23 0 26 2C23 3 20 4 20 4Z"/>
+      </svg>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><button class="nav-link active" id="nav-home" onclick="showPage('home')">Home</button></li>
+      <li><button class="nav-link" id="nav-products" onclick="showPage('products')">Products</button></li>
+      <li><button class="nav-link" id="nav-about" onclick="showPage('about')">About Us</button></li>
+      <li><button class="nav-link" id="nav-support" onclick="showPage('support')">Support</button></li>
+      <li><button class="nav-link" id="nav-contact" onclick="showPage('contact')">Contact Us</button></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="nav-icon-btn" aria-label="Search" onclick="showPage('support'); setTimeout(()=>document.getElementById('supportSearch').focus(),300)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </button>
+      <button class="nav-icon-btn" aria-label="Bag" onclick="showToast('Cart coming soon')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+      </button>
+      <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+</nav>
+
+<!-- Mobile Drawer (unchanged) -->
+<div class="nav-drawer" id="navDrawer">
+  <button class="nav-link" onclick="showPage('home'); closeMenu()">Home</button>
+  <button class="nav-link" onclick="showPage('products'); closeMenu()">Products</button>
+  <button class="nav-link" onclick="showPage('about'); closeMenu()">About Us</button>
+  <button class="nav-link" onclick="showPage('support'); closeMenu()">Support</button>
+  <button class="nav-link" onclick="showPage('contact'); closeMenu()">Contact Us</button>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 1 — HOME  (unchanged)
+════════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <section class="home-hero">
+    <div class="container">
+      <div class="hero-text reveal">
+        <h1>Innovation that<br>inspires.</h1>
+        <p>Discover the power of simplicity</p>
+        <button class="btn-dark" onclick="showPage('products')">Explore Products</button>
+      </div>
+      <div class="hero-img-wrap reveal" style="transition-delay:0.15s">
+        <div class="product-img">
+          <img src="Singkams_logo_white.png" alt="Logo" class="product-logo">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="home-values">
+    <div class="container">
+      <div class="value-item reveal"><h3>Powerful<br>Performance</h3></div>
+      <div class="value-item reveal" style="transition-delay:0.1s"><h3>Beautiful<br>Design</h3></div>
+      <div class="value-item reveal" style="transition-delay:0.2s"><h3>Built for<br>Everyone</h3></div>
+      <div class="value-item reveal" style="transition-delay:0.3s"><h3>Privacy<br>That Protects</h3></div>
+    </div>
+  </div>
+
+  <section class="home-built">
+    <div class="container">
+      <h2 class="reveal">Built for everything you love.</h2>
+      <p class="reveal" style="transition-delay:0.1s">Singkamas products are designed to<br>help you create, work, and play.</p>
+      <button class="link-blue reveal" style="transition-delay:0.2s" onclick="showPage('about')">Learn more &rsaquo;</button>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <button class="nav-logo" onclick="showPage('home')" style="margin-bottom:0">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px;fill:#111">
+              <img src="singkamas_logo(1).png" width="30" height="30">
+              <path d="M20 4C20 4 10 8 8 17C6 24 10 31 16 34C17.5 34.8 19 35 20 35C21 35 22.5 34.8 24 34C30 31 34 24 32 17C30 8 20 4 20 4ZM20 4C20 4 23 0 26 2C23 3 20 4 20 4Z"/>
+            </svg>
+          </button>
+          <p>Singkamas — Innovation that inspires. Products designed for the way you live, work, and create.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Products</h4>
+          <ul>
+            <li><button onclick="showPage('products')">SingMac</button></li>
+            <li><button onclick="showPage('products')">SingPhone</button></li>
+            <li><button onclick="showPage('products')">SingWatch</button></li>
+            <li><button onclick="showPage('products')">SingPods</button></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><button onclick="showPage('about')">About Us</button></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Help</h4>
+          <ul>
+            <li><button onclick="showPage('support')">Support</button></li>
+            <li><button onclick="showPage('contact')">Contact Us</button></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Singkamas Technologies, Inc. All rights reserved.</p>
+        <p>Metro Manila, Philippines</p>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /page-home -->
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 2 — PRODUCTS  (unchanged)
+════════════════════════════════════════════ -->
+<div class="page" id="page-products">
+
+  <div class="products-page">
+    <div class="container">
+
+      <div class="products-header reveal">
+        <h1>Our Products</h1>
+        <p>Explore our range of products designed to help you do more.</p>
+      </div>
+
+      <div class="product-filters reveal" style="transition-delay:0.1s">
+        <button class="filter-btn active" onclick="filterProducts('all', this)">All</button>
+        <button class="filter-btn" onclick="filterProducts('singmac', this)">SingMac</button>
+        <button class="filter-btn" onclick="filterProducts('singphone', this)">SingPhone</button>
+        <button class="filter-btn" onclick="filterProducts('singwatch', this)">SingWatch</button>
+        <button class="filter-btn" onclick="filterProducts('singpods', this)">SingPods</button>
+      </div>
+
+      <div class="product-grid reveal" style="transition-delay:0.2s" id="productGrid">
+
+        <!-- 1. SingPhone 15 Pro -->
+        <div class="product-card" data-cat="singphone">
+          <div class="product-img">
+            <img src="phone_1.png" alt="SingPhone 15 Pro">
+          </div>
+          <div class="product-card-footer">
+            <div class="product-card-name">SingPhone 15 Pro</div>
+            <button class="product-card-link" onclick="openModal('singphone-pro')">Learn more &rsaquo;</button>
+          </div>
+        </div>
+
+        <!-- 2. SingMac Pro -->
+        <div class="product-card" data-cat="singmac">
+          <div class="product-img">
+            <img src="mac1.png" alt="SingMac Pro">
+          </div>
+          <div class="product-card-footer">
+            <div class="product-card-name">SingMac Pro</div>
+            <button class="product-card-link" onclick="openModal('singmac-pro')">Learn more &rsaquo;</button>
+          </div>
+        </div>
+
+        <!-- 3. SingWatch Series 9 -->
+        <div class="product-card" data-cat="singwatch">
+          <div class="product-img">
+            <img src="singwatch_(9).png" alt="SingWatch Series 9">
+          </div>
+          <div class="product-card-footer">
+            <div class="product-card-name">SingWatch Series 9</div>
+            <button class="product-card-link" onclick="openModal('singwatch-s9')">Learn more &rsaquo;</button>
+          </div>
+        </div>
+
+        <!-- 4. SingPods Pro -->
+        <div class="product-card" data-cat="singpods">
+          <div class="product-img">
+            <img src="singpods_pro.png" alt="SingPods Pro">
+          </div>
+          <div class="product-card-footer">
+            <div class="product-card-name">SingPods Pro</div>
+            <button class="product-card-link" onclick="openModal('singpods-pro')">Learn more &rsaquo;</button>
+          </div>
+        </div>
+
+        <!-- 5. SingPhone 15 -->
+        <div class="product-card" data-cat="singphone">
+          <div class="product-img">
+            <img src="phone_1(2).png" alt="SingPhone 15">
+          </div>
+          <div class="product-card-footer">
+            <div class="product-card-name">SingPhone 15</div>
+            <button class="product-card-link" onclick="openModal('singphone-15')">Learn more &rsaquo;</button>
+          </div>
+        </div>
+
+        <!-- 6. SingMac Mini -->
+        <div class="product-card" data-cat="singmac">
+          <div class="product-img">
+            <img src="mac2.png" alt="SingMac Mini">
+          </div>
+          <div class="product-card-footer">
+            <div class="product-card-name">SingMac Mini</div>
+            <button class="product-card-link" onclick="openModal('singmac-mini')">Learn more &rsaquo;</button>
+          </div>
+        </div>
+
+        <!-- 7. SingWatch SE -->
+        <div class="product-card" data-cat="singwatch">
+          <div class="product-img">
+            <img src="singwatch(se).png" alt="SingWatch SE">
+          </div>
+          <div class="product-card-footer">
+            <div class="product-card-name">SingWatch SE</div>
+            <button class="product-card-link" onclick="openModal('singwatch-se')">Learn more &rsaquo;</button>
+          </div>
+        </div>
+
+        <!-- 8. SingPods Max -->
+        <div class="product-card" data-cat="singpods">
+          <div class="product-img">
+            <img src="singpods_max.png" alt="SingPods Max">
+          </div>
+          <div class="product-card-footer">
+            <div class="product-card-name">SingPods Max</div>
+            <button class="product-card-link" onclick="openModal('singpods-max')">Learn more &rsaquo;</button>
+          </div>
+        </div>
+
+        <!-- 9. SingPhone 14 -->
+        <div class="product-card" data-cat="singphone">
+          <div class="product-img">
+            <img src="phone_3(3).png" alt="SingPhone 14">
+          </div>
+          <div class="product-card-footer">
+            <div class="product-card-name">SingPhone 14</div>
+            <button class="product-card-link" onclick="openModal('singphone-14')">Learn more &rsaquo;</button>
+          </div>
+        </div>
+
+        <!-- 10. SingMac Air -->
+        <div class="product-card" data-cat="singmac">
+          <div class="product-img">
+            <img src="mac3.png" alt="SingMac Air">
+          </div>
+          <div class="product-card-footer">
+            <div class="product-card-name">SingMac Air</div>
+            <button class="product-card-link" onclick="openModal('singmac-air')">Learn more &rsaquo;</button>
+          </div>
+        </div>
+
+      </div><!-- /productGrid -->
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <button class="nav-logo" onclick="showPage('home')" style="margin-bottom:0">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px;fill:#111">
+              <img src="singkamas_logo(1).png" width="30" height="30">
+              <path d="M20 4C20 4 10 8 8 17C6 24 10 31 16 34C17.5 34.8 19 35 20 35C21 35 22.5 34.8 24 34C30 31 34 24 32 17C30 8 20 4 20 4ZM20 4C20 4 23 0 26 2C23 3 20 4 20 4Z"/>
+            </svg>
+          </button>
+          <p>Singkamas — Innovation that inspires.</p>
+        </div>
+        <div class="footer-col"><h4>Products</h4><ul>
+          <li><button onclick="filterProducts('singmac', null)">SingMac</button></li>
+          <li><button onclick="filterProducts('singphone', null)">SingPhone</button></li>
+          <li><button onclick="filterProducts('singwatch', null)">SingWatch</button></li>
+          <li><button onclick="filterProducts('singpods', null)">SingPods</button></li>
+        </ul></div>
+        <div class="footer-col"><h4>Company</h4><ul>
+          <li><button onclick="showPage('about')">About Us</button></li>
+        </ul></div>
+        <div class="footer-col"><h4>Help</h4><ul>
+          <li><button onclick="showPage('support')">Support</button></li>
+          <li><button onclick="showPage('contact')">Contact Us</button></li>
+        </ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Singkamas Technologies, Inc.</p>
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /page-products -->
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 3 — ABOUT US
+     (unchanged content + NEW project explanation section added at bottom)
+════════════════════════════════════════════ -->
+<div class="page" id="page-about">
+  <div class="about-page">
+    <div class="container">
+
+      <div class="about-hero">
+        <div class="about-text reveal">
+          <h1>About Singkamas</h1>
+          <p>At Singkamas, we believe in the power of innovation to improve lives.</p>
+          <p>We design products that combine beautiful design with powerful technology, while keeping people and the planet in mind.</p>
+        </div>
+        <div class="about-img-wrap reveal" style="transition-delay:0.15s">
+          <div class="about-img">
+            <svg class="about-logo-large" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <img src="singkamas_logo(2).png" alt="Logo" class="product-logo">
+              <path d="M100 20C100 20 50 40 40 85C30 120 50 155 80 170C87.5 174 94 176 100 176C106 176 112.5 174 120 170C150 155 170 120 160 85C150 40 100 20 100 20ZM100 20C100 20 115 0 130 10C115 15 100 20 100 20Z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="about-mvp">
+      <div class="container">
+        <div class="mvp-item reveal">
+          <h3>Our Mission</h3>
+          <p>To deliver clean, functional, and visually appealing products that improve user experience.</p>
+        </div>
+        <div class="mvp-item reveal" style="transition-delay:0.15s">
+          <h3>Our Vision</h3>
+          <p>To become a trusted technology company known for modern designs and meaningful innovation.</p>
+        </div>
+        <div class="mvp-item reveal" style="transition-delay:0.3s">
+          <h3>Our Objectives</h3>
+          <p>Build responsive and user-friendly products that delight millions of people every single day.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       NEW: PROJECT EXPLANATION SECTION
+       (added below existing about content)
+  ════════════════════════════════════════════ -->
+  <section class="project-explain">
+    <div class="container">
+
+      
+
+      
+      <!-- Team / Members -->
+      <h3 class="explain-team-heading reveal" style="transition-delay:0.34s">Project Team</h3>
+      <div class="explain-team-grid reveal" style="transition-delay:0.38s">
+        <div class="explain-member">
+          <div class="member-avatar">
+            <img src="icon_jhay.png" alt="Member 1">
+          </div>
+          <div class="member-info">
+            <strong>Member 1 - Jhayrine G. Ventura</strong>
+            <span>UI Design &amp; Layout</span>
+          </div>
+        </div>
+        <div class="explain-member">
+          <div class="member-avatar">
+            <img src="icon_mika.png" alt="Member 2">
+          </div>
+          <div class="member-info">
+            <strong>Member 2 - Mikaella D. Marzado</strong>
+            <span>HTML &amp; Structure</span>
+          </div>
+        </div>
+        <div class="explain-member">
+          <div class="member-avatar">
+            <img src="icon_voughn.png" alt="Member 3">
+          </div>
+          <div class="member-info">
+            <strong>Member 3 - Angelo Voughn Fernandez</strong>
+            <span>CSS &amp; Styling</span>
+          </div>
+        </div>
+
+
+    </div>
+  </section>
+  <!-- /project explanation -->
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <button class="nav-logo" onclick="showPage('home')" style="margin-bottom:0">
+            <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px;fill:#111">
+              <img src="singkamas_logo(1).png" width="30" height="30">
+              <path d="M20 4C20 4 10 8 8 17C6 24 10 31 16 34C17.5 34.8 19 35 20 35C21 35 22.5 34.8 24 34C30 31 34 24 32 17C30 8 20 4 20 4ZM20 4C20 4 23 0 26 2C23 3 20 4 20 4Z"/>
+            </svg>
+          </button>
+          <p>Singkamas — Innovation that inspires.</p>
+        </div>
+        <div class="footer-col"><h4>Company</h4><ul>
+          <li><button onclick="showPage('about')">About Us</button></li>
+        </ul></div>
+        <div class="footer-col"><h4>Products</h4><ul>
+          <li><button onclick="showPage('products')">All Products</button></li>
+        </ul></div>
+        <div class="footer-col"><h4>Help</h4><ul>
+          <li><button onclick="showPage('support')">Support</button></li>
+          <li><button onclick="showPage('contact')">Contact</button></li>
+        </ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Singkamas Technologies, Inc.</p>
+      </div>
+    </div>
+  </footer>
+</div><!-- /page-about -->
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 4 — SUPPORT  (unchanged)
+════════════════════════════════════════════ -->
+<div class="page" id="page-support">
+  <div class="support-page">
+
+    <section class="support-hero">
+      <h1 class="reveal">How can we help you?</h1>
+      <div class="support-search-wrap reveal" style="transition-delay:0.12s">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input class="support-input" id="supportSearch" type="text"
+          placeholder="Search support" oninput="filterFAQ(this.value)">
+      </div>
+    </section>
+
+    <section class="support-topics">
+      <div class="container">
+        <h2 class="reveal">Browse topics</h2>
+        <div class="topics-grid">
+          <div class="topic-card reveal" onclick="showToast('Setup & Start — opening...')">
+            <span class="topic-icon">🚀</span>
+            <h4>Setup & Getting Started</h4>
+            <p>New device setup, quick start guides, and first steps.</p>
+          </div>
+          <div class="topic-card reveal" style="transition-delay:0.1s" onclick="showToast('Repairs & Service — opening...')">
+            <span class="topic-icon">🔧</span>
+            <h4>Repairs & Service</h4>
+            <p>Schedule service, find a repair center near you.</p>
+          </div>
+          <div class="topic-card reveal" style="transition-delay:0.2s" onclick="showToast('Account & Security — opening...')">
+            <span class="topic-icon">🔐</span>
+            <h4>Account & Security</h4>
+            <p>Manage your Singkamas ID and privacy settings.</p>
+          </div>
+          <div class="topic-card reveal" style="transition-delay:0.3s" onclick="showToast('Billing & Orders — opening...')">
+            <span class="topic-icon">💳</span>
+            <h4>Billing & Orders</h4>
+            <p>Order tracking, payment, returns, and exchanges.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="support-faq">
+      <div class="container">
+        <h2 class="reveal">Frequently asked questions</h2>
+        <div id="faqList">
+
+          <div class="faq-item" data-q="set up singphone">
+            <button class="faq-btn" onclick="toggleFAQ(this)">
+              How do I set up my new SingPhone?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="faq-body"><div class="faq-body-inner">Power on your SingPhone and follow the on-screen setup assistant. You'll need your Singkamas ID to activate the device. Use Quick Transfer to move your data wirelessly from your old device in minutes.</div></div>
+          </div>
+
+          <div class="faq-item" data-q="warranty how long">
+            <button class="faq-btn" onclick="toggleFAQ(this)">
+              How long is the standard warranty?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="faq-body"><div class="faq-body-inner">All Singkamas products include a one-year limited warranty. Extend it with SingCare+ for up to two additional years of coverage plus accidental damage protection.</div></div>
+          </div>
+
+          <div class="faq-item" data-q="connect singpods bluetooth">
+            <button class="faq-btn" onclick="toggleFAQ(this)">
+              How do I connect SingPods to my device?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="faq-body"><div class="faq-body-inner">Open the SingPods case next to your unlocked SingPhone or SingMac — a pairing animation appears automatically. Tap Connect. SingPods switch between your Singkamas devices based on which you're using.</div></div>
+          </div>
+
+          <div class="faq-item" data-q="trade in old device">
+            <button class="faq-btn" onclick="toggleFAQ(this)">
+              Can I trade in my old device?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="faq-body"><div class="faq-body-inner">Yes! Singkamas Trade In lets you exchange eligible devices for credit toward a new purchase. Visit any Singkamas Store or our website, get an instant estimate, and apply credit at checkout.</div></div>
+          </div>
+
+          <div class="faq-item" data-q="repair schedule service">
+            <button class="faq-btn" onclick="toggleFAQ(this)">
+              How do I schedule a repair?
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="faq-body"><div class="faq-body-inner">Schedule through our website or the Singkamas Support app. Most repairs offer same-day service when you arrive before noon. Mail-in repair is also available.</div></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <button class="nav-logo" onclick="showPage('home')" style="margin-bottom:0">
+              <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px;fill:#111">
+                <img src="singkamas_logo(1).png" width="30" height="30">
+                <path d="M20 4C20 4 10 8 8 17C6 24 10 31 16 34C17.5 34.8 19 35 20 35C21 35 22.5 34.8 24 34C30 31 34 24 32 17C30 8 20 4 20 4ZM20 4C20 4 23 0 26 2C23 3 20 4 20 4Z"/>
+              </svg>
+            </button>
+            <p>Singkamas — Innovation that inspires.</p>
+          </div>
+          <div class="footer-col"><h4>Support</h4><ul>
+            <li><button onclick="showPage('support')">Help Center</button></li>
+            <li><button onclick="showPage('contact')">Contact Us</button></li>
+          </ul></div>
+          <div class="footer-col"><h4>Products</h4><ul>
+            <li><button onclick="showPage('products')">All Products</button></li>
+          </ul></div>
+          <div class="footer-col"><h4>Company</h4><ul>
+            <li><button onclick="showPage('about')">About Us</button></li>
+          </ul></div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 Singkamas Technologies, Inc.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+</div><!-- /page-support -->
+
+
+<!-- ═══════════════════════════════════════════
+     PAGE 5 — CONTACT US  (unchanged)
+════════════════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <div class="contact-page">
+    <div class="contact-layout">
+      <div class="container">
+        <h1 class="reveal">Contact Us</h1>
+        <p class="reveal" style="transition-delay:0.08s;font-size:16px;font-weight:300;color:var(--gray-mid);margin-bottom:48px;">We'd love to hear from you.</p>
+
+        <div class="contact-grid">
+
+          <div class="reveal">
+            <div class="contact-form" id="contactForm">
+              <input class="contact-input" id="cName" type="text" placeholder="Name">
+              <input class="contact-input" id="cEmail" type="email" placeholder="Email">
+              <textarea class="contact-textarea" id="cMsg" placeholder="Message"></textarea>
+              <button class="contact-submit" onclick="submitContact()">Send Message</button>
+            </div>
+            <div class="form-ok" id="formOk">✅ Message sent! We'll get back to you within 24 hours.</div>
+          </div>
+
+          <div class="reveal" style="transition-delay:0.18s">
+            <div class="contact-info">
+              <h2>Our Information</h2>
+              <div class="info-row">
+                <div class="info-icon">✉️</div>
+                <div>
+                  <strong>Email</strong>
+                  <span>Singkamas@gmail.com</span>
+                </div>
+              </div>
+              <div class="info-row">
+                <div class="info-icon">📞</div>
+                <div>
+                  <strong>Phone</strong>
+                  <span>+63-246-0333-0222-SINGKAMAS</span>
+                </div>
+              </div>
+              <div class="info-row">
+                <div class="info-icon">📍</div>
+                <div>
+                  <strong>Location</strong>
+                  <span>Singkamas Park, Sampaloc City, Metro Manila</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="contact-social">
+              <h2>Follow Us</h2>
+              <div class="social-links">
+                <button class="social-link" onclick="showToast('Opening Facebook...')">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+                  Facebook
+                </button>
+                <button class="social-link" onclick="showToast('Opening Instagram...')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
+                  Instagram
+                </button>
+                <button class="social-link" onclick="showToast('Opening Twitter/X...')">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  Twitter / X
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <button class="nav-logo" onclick="showPage('home')" style="margin-bottom:0">
+              <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" style="width:28px;height:28px;fill:#111">
+                <img src="singkamas_logo(1).png" width="30" height="30">
+                <path d="M20 4C20 4 10 8 8 17C6 24 10 31 16 34C17.5 34.8 19 35 20 35C21 35 22.5 34.8 24 34C30 31 34 24 32 17C30 8 20 4 20 4ZM20 4C20 4 23 0 26 2C23 3 20 4 20 4Z"/>
+              </svg>
+            </button>
+            <p>Singkamas — Innovation that inspires.</p>
+          </div>
+          <div class="footer-col"><h4>Contact</h4><ul>
+            <li><button onclick="showPage('contact')">Contact Us</button></li>
+            <li><button onclick="showPage('support')">Support</button></li>
+          </ul></div>
+          <div class="footer-col"><h4>Products</h4><ul>
+            <li><button onclick="showPage('products')">All Products</button></li>
+          </ul></div>
+          <div class="footer-col"><h4>Company</h4><ul>
+            <li><button onclick="showPage('about')">About Us</button></li>
+          </ul></div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 Singkamas Technologies, Inc.</p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+</div><!-- /page-contact -->
+
+
+<!-- Toast (unchanged) -->
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════════════════════════════════════
+     PRODUCT DETAIL MODAL  
+════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal-box" id="modalBox">
+    <div class="modal-img-panel" id="modalImgPanel">
+      <img id="modalImage" src="" alt="" style="width:100%;height:100%;object-fit:contain;padding:32px;position:relative;z-index:1;">
+    </div>
+    <div class="modal-info-panel">
+      <button class="modal-close" onclick="closeModal()" aria-label="Close">&#x2715;</button>
+      <div class="modal-badge" id="modalBadge">Smartphone</div>
+      <h2 class="modal-title" id="modalTitle">SingPhone 15 Pro</h2>
+      <div class="modal-subtitle" id="modalSubtitle">The most powerful SingPhone ever.</div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <ul class="modal-specs" id="modalSpecs"></ul>
+      <div class="modal-cta">
+        <button class="modal-btn-dark" onclick="showToast('Added to cart! 🛍'); closeModal()">Add to Cart</button>
+        <button class="modal-btn-outline" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEW: BACK TO TOP BUTTON -->
+<button id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+    <path d="M18 15l-6-6-6 6"/>
+  </svg>
+</button>
+
+
+<!-- ═══════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════ -->
+<script>
+  
+
+  const PAGES = ['home','products','about','support','contact'];
+
+  function showPage(id) {
+    // NEW: flash transition
+    const flash = document.getElementById('pageTransition');
+    flash.classList.add('flash');
+    setTimeout(() => flash.classList.remove('flash'), 220);
+
+    PAGES.forEach(p => {
+      document.getElementById('page-' + p).classList.toggle('active', p === id);
+      const btn = document.getElementById('nav-' + p);
+      if (btn) btn.classList.toggle('active', p === id);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    closeMenu();
+    setTimeout(observeReveals, 80);
+  }
+
+  function toggleMenu() {
+    const d = document.getElementById('navDrawer');
+    const h = document.getElementById('hamburger');
+    const open = d.classList.toggle('open');
+    h.classList.toggle('open', open);
+  }
+  function closeMenu() {
+    document.getElementById('navDrawer').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+  }
+
+  function filterProducts(cat, btn) {
+    if (btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+    document.querySelectorAll('#productGrid .product-card').forEach(card => {
+      const match = cat === 'all' || card.dataset.cat === cat;
+      card.style.display = match ? '' : 'none';
+    });
+    if (!document.getElementById('page-products').classList.contains('active')) {
+      showPage('products');
+      setTimeout(() => filterProducts(cat, document.querySelector('.filter-btn.active')), 100);
+    }
+  }
+
+  function toggleFAQ(btn) {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  }
+
+  function filterFAQ(q) {
+    const term = q.toLowerCase();
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const text = (item.dataset.q || '') + ' ' + item.querySelector('.faq-body-inner').textContent.toLowerCase();
+      item.style.display = text.includes(term) ? '' : 'none';
+    });
+  }
+
+  function submitContact() {
+    const name  = document.getElementById('cName').value.trim();
+    const email = document.getElementById('cEmail').value.trim();
+    const msg   = document.getElementById('cMsg').value.trim();
+    if (!name || !email || !msg) { showToast('Please fill in all fields.'); return; }
+    if (!email.includes('@') || !email.includes('.')) { showToast('Enter a valid email address.'); return; }
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formOk').classList.add('show');
+    setTimeout(() => {
+      document.getElementById('contactForm').style.display = '';
+      document.getElementById('formOk').classList.remove('show');
+      document.getElementById('cName').value = '';
+      document.getElementById('cEmail').value = '';
+      document.getElementById('cMsg').value = '';
+    }, 4500);
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove('show'), 2800);
+  }
+
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+
+  function observeReveals() {
+    document.querySelectorAll('.reveal:not(.visible)').forEach(el => revealObserver.observe(el));
+  }
+
+  const PRODUCTS = {
+    'singphone-pro': {
+      img: 'phone_1.png', badge: 'Smartphone', title: 'SingPhone 15 Pro',
+      subtitle: 'Titanium. A18 chip. Pro camera system.',
+      desc: 'The most powerful SingPhone ever. A revolutionary A18 Singkamas chip, a titanium design that is lighter than ever, and a pro-grade triple camera system that captures every moment in breathtaking detail.',
+      specs: ['6.7" Super Retina XDR ProMotion display','A18 Singkamas chip with Neural Engine','48MP Triple camera — Wide, Ultra Wide, Telephoto','Titanium frame — strongest material ever in SingPhone','All-day battery with fast charging support','Emergency SOS via satellite']
+    },
+    'singphone-15': {
+      img: 'phone_1(2).png', badge: 'Smartphone', title: 'SingPhone 15',
+      subtitle: 'New camera. New design. Loved by all.',
+      desc: 'SingPhone 15 features a stunning new design with Dynamic Island, a 48MP main camera, and the powerful A16 Singkamas chip — all at an accessible price.',
+      specs: ['6.1" Super Retina XDR display with Dynamic Island','A16 Singkamas chip','48MP main camera with computational photography','USB-C connector for universal compatibility','Up to 20 hours video playback','Crash Detection & Emergency SOS']
+    },
+    'singphone-14': {
+      img: 'phone_3(3).png', badge: 'Smartphone', title: 'SingPhone 14',
+      subtitle: 'Supercharged. Still incredible.',
+      desc: 'SingPhone 14 delivers the performance and features you love at an even better value. With the A15 Singkamas chip and an advanced dual-camera system.',
+      specs: ['6.1" Super Retina XDR display','A15 Singkamas chip','12MP Dual camera — Wide & Ultra Wide','Action mode for smooth, stabilised video','Up to 19 hours video playback','Available in 6 stunning colours']
+    },
+    'singmac-pro': {
+      img: 'mac1.png', badge: 'SingMac', title: 'SingMac Pro',
+      subtitle: 'Unbelievably thin. Incredibly powerful.',
+      desc: 'SingMac Pro is the ultimate expression of portability and power. With the M4 Singkamas chip and a stunning Ultra Retina XDR display, it redefines what a laptop can do.',
+      specs: ['13" Ultra Retina XDR OLED display','M4 Singkamas chip — desktop-class performance','Tandem OLED — extreme brightness and contrast','Compatible with SingPencil Pro & Magic Keyboard','Up to 10 hours battery life','Wi-Fi 6E and optional 5G']
+    },
+    'singmac-mini': {
+      img: 'mac2.png', badge: 'SingMac', title: 'SingMac Mini',
+      subtitle: 'Small but mighty.',
+      desc: 'SingMac Mini packs a massive punch in an incredibly compact form. It is the perfect companion for reading, browsing, and on-the-go creativity.',
+      specs: ['8.3" Liquid Retina display','A15 Singkamas chip','USB-C for fast data transfer and charging','Compatible with SingPencil (2nd gen)','Wi-Fi 6 and optional 5G','Up to 10 hours battery life']
+    },
+    'singmac-air': {
+      img: 'mac3.png', badge: 'SingMac', title: 'SingMac Air',
+      subtitle: 'Serious performance. Seriously portable.',
+      desc: 'SingMac Air is thin, light, and loaded with the M2 Singkamas chip. Whether you are tackling creative projects or everyday tasks, SingMac Air handles it all beautifully.',
+      specs: ['11" or 13" Liquid Retina display','M2 Singkamas chip','12MP front camera with Centre Stage','Compatible with SingPencil (2nd gen) & Magic Keyboard','Wi-Fi 6E and optional 5G','Up to 10 hours battery life']
+    },
+    'singwatch-s9': {
+      img: 'singwatch_(9).png', badge: 'Smartwatch', title: 'SingWatch Series 9',
+      subtitle: 'A new chapter in health & connectivity.',
+      desc: 'SingWatch Series 9 is smarter, brighter, and more capable than ever. The S9 Singkamas chip and new Double Tap gesture put intelligent health and fitness tracking right on your wrist.',
+      specs: ['Always-On Retina LTPO display — 2000 nits brightness','S9 Singkamas chip with 4-core Neural Engine','Advanced sensors: ECG, Blood Oxygen, Crash Detection','Double Tap gesture for one-handed control','Up to 18 hours battery / 60hr low power mode','Water resistant to 50 metres']
+    },
+    'singwatch-se': {
+      img: 'singwatch(se).png', badge: 'Smartwatch', title: 'SingWatch SE',
+      subtitle: 'The perfect SingWatch to start with.',
+      desc: 'SingWatch SE has all the essentials for a healthy, connected life — at an unbeatable price. Track fitness, monitor your heart rate, and stay in touch.',
+      specs: ['Retina LTPO display','S8 Singkamas chip','Heart rate & irregular rhythm notifications','Crash Detection & Emergency SOS','Up to 18 hours battery life','Water resistant to 50 metres']
+    },
+    'singpods-pro': {
+      img: 'singpods_pro.png', badge: 'Audio', title: 'SingPods Pro',
+      subtitle: 'Adaptive Audio. Pure immersion.',
+      desc: 'SingPods Pro deliver industry-leading Active Noise Cancellation and a new Adaptive Audio mode that automatically adjusts sound to your environment.',
+      specs: ['Active Noise Cancellation — industry-leading','Adaptive Audio blends ANC and Transparency','Personalised Spatial Audio with dynamic head tracking','Up to 6 hours listening (30 hours with case)','H2 Singkamas chip','IPX4 sweat and water resistance']
+    },
+    'singpods-max': {
+      img: 'singpods_max.png', badge: 'Audio', title: 'SingPods Max',
+      subtitle: 'Premium over-ear. Ultimate sound.',
+      desc: 'SingPods Max take the SingPods experience to its absolute zenith. With custom-built 40mm drivers, advanced computational audio, and premium materials throughout.',
+      specs: ['40mm custom-built dynamic drivers','Active Noise Cancellation — best-in-class','Computational audio with dual H1 chips','Up to 20 hours battery with ANC enabled','Breathable knit mesh canopy & memory foam ear cushions','Premium aluminium and stainless steel construction']
+    }
+  };
+
+  function openModal(productId) {
+    const p = PRODUCTS[productId];
+    if (!p) return;
+    const modalImg = document.getElementById('modalImage');
+    modalImg.src = p.img; modalImg.alt = p.title;
+    document.getElementById('modalBadge').textContent    = p.badge;
+    document.getElementById('modalTitle').textContent    = p.title;
+    document.getElementById('modalSubtitle').textContent = p.subtitle;
+    document.getElementById('modalDesc').textContent     = p.desc;
+    document.getElementById('modalSpecs').innerHTML      = p.specs.map(s => `<li>${s}</li>`).join('');
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function handleOverlayClick(e) {
+    if (e.target === document.getElementById('modalOverlay')) closeModal();
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+
+  // 1. LOADING SCREEN — hide after page loads
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('loadingScreen').classList.add('hidden');
+      observeReveals();
+    }, 1900);
+  });
+
+  // 2. ANNOUNCEMENT BANNER
+  document.body.classList.add('banner-visible');
+  function dismissBanner() {
+    document.getElementById('announceBanner').classList.add('hidden');
+    document.body.classList.remove('banner-visible');
+  }
+
+  // 3. BACK TO TOP
+  const bttBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    bttBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+
+  // 4. INIT
+  window.addEventListener('DOMContentLoaded', () => {
+    observeReveals();
+  });
+</script>
+
+</body>
+</html>
